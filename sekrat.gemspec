@@ -10,7 +10,6 @@ Gem::Specification.new do |spec|
   spec.email         = ["pooster@gmail.com"]
 
   spec.summary       = %q{An embedded key/value store with pluggable storage and encryption}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
   spec.homepage      = "https://github.com/sekrat/sekrat-ruby"
   spec.license       = "MIT"
 
@@ -26,4 +25,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.16"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency 'simplecov', '~> 0.16'
 end

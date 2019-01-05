@@ -1,3 +1,12 @@
+require 'simplecov'
+
+SimpleCov.start do
+  add_filter '/spec'
+
+  add_group 'Warehouses', 'lib/sekrat/warehouse'
+  add_group 'crypters', 'lib/sekrat/crypters'
+end
+
 require "bundler/setup"
 require "sekrat"
 
