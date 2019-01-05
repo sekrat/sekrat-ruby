@@ -1,6 +1,8 @@
 require 'sekrat/errors'
 
 module Sekrat
+
+  # A secret manager that coordinates both storage and encryption
   class Manager
     attr_reader :crypter, :warehouse
 
@@ -15,19 +17,14 @@ module Sekrat
 
     def put(id, key, data)
       begin
-        warehouse.store(
-          id,
-          crypter.encrypt(key, data)
-        )
-
-        data
+        data.tap {|data| warehouse.store(id, crypter.encrypt(key, data))}
       rescue EncryptFailure
         raise EncryptFailure.new("could not encrypt '#{id}'")
       rescue StorageFailure
         raise StorageFailure.new("could not store '#{id}'")
-      rescue => e
+      rescue => error
         raise Error.new(
-          "an unknown error (#{e}) occurred trying to save '#{id}'"
+          "an unknown error (#{error}) occurred trying to save '#{id}'"
         )
       end
     end
@@ -42,9 +39,9 @@ module Sekrat
         raise DecryptFailure.new("could not decrypt '#{id}'")
       rescue NotFound
         raise NotFound.new("could not retrieve '#{id}'")
-      rescue => e
+      rescue => error
         raise Error.new(
-          "an unknown error (#{e}) occurred trying to load '#{id}'"
+          "an unknown error (#{error}) occurred trying to load '#{id}'"
         )
       end
     end

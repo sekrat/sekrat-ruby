@@ -2,6 +2,8 @@ require 'sekrat/errors'
 
 module Sekrat
   module Warehouse
+
+    # A base mixin for would-be Sekrat::Warehouse implementations
     module Base
       def ids
         raise NotImplemented.new("ids is not implemented")
